@@ -1,0 +1,7 @@
+{
+  "name": "Crystalyze Explorer",
+  "description": "A sophisticated crystal encyclopedia and explorer that organizes information about crystal types, properties, and meanings, drawing inspiration and data patterns from Crystalyze Guide.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
