@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Crystal, CrystalSearchResponse } from '../types';
+import { useI18n } from '../i18n';
 
 interface CrystalModalProps {
   crystal: Crystal | null;
@@ -10,6 +11,7 @@ interface CrystalModalProps {
 }
 
 const CrystalModal: React.FC<CrystalModalProps> = ({ crystal, aiData, loading, onClose }) => {
+  const { t } = useI18n();
   if (!crystal) return null;
 
   return (
@@ -32,39 +34,39 @@ const CrystalModal: React.FC<CrystalModalProps> = ({ crystal, aiData, loading, o
           />
         </div>
 
-        <div className="w-full md:w-3/5 p-8 overflow-y-auto bg-neutral-900/50">
-          <h2 className="font-serif text-4xl font-bold text-white mb-4">{crystal.name}</h2>
+        <div className="w-full md:w-3/5 p-8 overflow-y-auto bg-[color:var(--modal-bg)]">
+          <h2 className="font-serif text-4xl font-bold text-[var(--app-fg)] mb-4">{crystal.name}</h2>
           
           <div className="flex flex-wrap gap-4 mb-8">
             <div className="flex flex-col">
-              <span className="text-[10px] uppercase text-gray-500 font-bold tracking-widest">Hardness</span>
-              <span className="text-white font-medium">{crystal.hardness || '7'}</span>
+              <span className="text-[10px] uppercase text-gray-500 font-bold tracking-widest">{t('modal.hardness')}</span>
+              <span className="text-[var(--app-fg)] font-medium">{crystal.hardness || '7'}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] uppercase text-gray-500 font-bold tracking-widest">Chakra</span>
-              <span className="text-white font-medium">{crystal.chakra?.join(', ') || 'N/A'}</span>
+              <span className="text-[10px] uppercase text-gray-500 font-bold tracking-widest">{t('modal.chakra')}</span>
+              <span className="text-[var(--app-fg)] font-medium">{crystal.chakra?.join(', ') || t('common.na')}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] uppercase text-gray-500 font-bold tracking-widest">Element</span>
-              <span className="text-white font-medium">{crystal.element?.join(', ') || 'Earth'}</span>
+              <span className="text-[10px] uppercase text-gray-500 font-bold tracking-widest">{t('modal.element')}</span>
+              <span className="text-[var(--app-fg)] font-medium">{crystal.element?.join(', ') || t('common.earth')}</span>
             </div>
           </div>
 
           <div className="space-y-6">
             <div>
-              <h4 className="text-purple-400 font-bold text-sm uppercase tracking-wider mb-2">Deep Insights (Powered by AI)</h4>
+              <h4 className="text-purple-400 font-bold text-sm uppercase tracking-wider mb-2">{t('modal.deepInsights')}</h4>
               {loading ? (
-                <div className="flex items-center space-x-3 text-gray-400 animate-pulse">
+                <div className="flex items-center space-x-3 text-[color:var(--text-muted)] animate-pulse">
                   <div className="w-4 h-4 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" />
-                  <span>Consulting the cosmic database...</span>
+                  <span>{t('modal.consulting')}</span>
                 </div>
               ) : aiData ? (
-                <div className="prose prose-invert prose-sm max-w-none text-gray-300 leading-relaxed whitespace-pre-line">
+                <div className="prose prose-invert prose-sm max-w-none text-[color:var(--text-muted)] leading-relaxed whitespace-pre-line">
                   {aiData.content}
                   
                   {aiData.sources.length > 0 && (
                     <div className="mt-6 pt-6 border-t border-white/10">
-                      <h5 className="text-[10px] uppercase text-gray-500 font-bold tracking-widest mb-2">Sources Found</h5>
+                      <h5 className="text-[10px] uppercase text-gray-500 font-bold tracking-widest mb-2">{t('modal.sourcesFound')}</h5>
                       <div className="flex flex-col gap-1">
                         {aiData.sources.slice(0, 3).map((source, i) => (
                           <a 
@@ -85,7 +87,7 @@ const CrystalModal: React.FC<CrystalModalProps> = ({ crystal, aiData, loading, o
                   )}
                 </div>
               ) : (
-                <p className="text-gray-400 italic">Select a crystal to view its spiritual secrets.</p>
+                <p className="text-[color:var(--text-muted)] italic">{t('modal.noAiData')}</p>
               )}
             </div>
           </div>

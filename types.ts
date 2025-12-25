@@ -23,3 +23,5 @@ export interface CrystalSearchResponse {
   content: string;
   sources: GroundingSource[];
 }
+
+export type Locale = 'en' | 'zh-CN';
